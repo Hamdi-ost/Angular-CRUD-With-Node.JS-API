@@ -1,0 +1,16 @@
+{
+  "name": "product-app",
+  "version": "1.0.0",
+  "description": "sample project for knowledge",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hamdi",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.20"
+  }
+}
