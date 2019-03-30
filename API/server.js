@@ -1,13 +1,28 @@
 // get dependencies
 const express = require ('express');
 const bodyParser = require ('body-parser');
+
+const app = express();
+
+// Enable CORS for all HTTP methods
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+
+// parse requests
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 // configuring the database
 const config = require ('./config');
 const mongoose = require ('mongoose');
+require('./routes/product.routes')(app); 
 
-const app = express();
 mongoose.Promise = global.Promise;
-
 
 //Connectiong to the database
 mongoose.connect(config.url, {
@@ -19,9 +34,6 @@ mongoose.connect(config.url, {
     process.exit();
 });
 
-// parse requests
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 
 // default route
 app.get('/', (req, res) => {
